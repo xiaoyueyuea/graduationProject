@@ -1,0 +1,35 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+    "-//Hibernate/Hibernate Configuration DTD//EN"
+    "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+  <session-factory>
+    <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+    <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/Lay?characterEncoding=UTF-8&amp;serverTimezone=GMT%2B8</property>
+    <property name="hibernate.connection.username">root</property>
+    <property name="hibernate.connection.password">123456</property>
+
+    <!-- 设置连接提供者 -->
+    <property name="hibernate.connection.provider_class">org.hibernate.c3p0.internal.C3P0ConnectionProvider</property>
+    <!-- c3p0连接池的配置 -->
+    <property name="hibernate.c3p0.max_size">20</property>  <!-- 最大连接池 -->
+    <property name="hibernate.c3p0.min_size">1</property>  <!-- 最小连接数 -->
+    <property name="hibernate.c3p0.timeout">120</property>  <!-- 超时 -->
+    <property name="hibernate.c3p0.idle_test_period">3000</property>  <!-- 空闲连接 -->
+
+    <!-- 格式化sql -->
+    <property name="hibernate.format_sql">true</property>
+
+    <!-- hibernate的方言 -->
+    <property name="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</property>
+
+    <!-- 自动创建表 -->
+    <property name="hibernate.hbm2ddl.auto">update</property>
+
+    <!-- 用于设置事务提交方式 -->
+    <property name="hibernate.connection.autocommit">false</property>
+
+    <mapping class="com.yuelei.entity.UserEntity"/>
+    <mapping resource="UserEntity.hbm.xml"/>
+  </session-factory>
+</hibernate-configuration>
