@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="com.yuelei.entity.RoompictureEntity" table="roompicture" schema="lay">
+        <id name="id" column="id"/>
+        <property name="type" column="type"/>
+        <property name="picture1" column="picture1"/>
+        <property name="picture2" column="picture2"/>
+        <property name="picture3" column="picture3"/>
+        <property name="picture4" column="picture4"/>
+    </class>
+</hibernate-mapping>

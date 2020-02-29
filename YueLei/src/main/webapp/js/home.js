@@ -1,7 +1,7 @@
 $(function () {
     $("#centerTabsId").tabs('add',{
         title:'主页',
-        content:'home',
+        href:'consumerBookRoom/consumerBookRoomInformation',
         closable:false,
         iconCls:'icon-home',
         padding:'5px'

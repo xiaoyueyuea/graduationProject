@@ -1,6 +1,6 @@
 package com.yuelei.service;
 
-import com.yuelei.entity.UserItem;
+import com.yuelei.entity.item.UserItem;
 
 import java.util.List;
 

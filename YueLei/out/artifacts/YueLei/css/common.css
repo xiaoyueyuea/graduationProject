@@ -4,3 +4,9 @@ body {
     font-size: 12px;
     margin: 0;
 }
+
+li {
+    display:inline;
+    float:left;
+    list-style:none;
+}

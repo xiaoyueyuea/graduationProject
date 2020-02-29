@@ -2,7 +2,7 @@ package com.yuelei.serviceImpl;
 
 import com.yuelei.dao.UserDao;
 import com.yuelei.entity.UserEntity;
-import com.yuelei.entity.UserItem;
+import com.yuelei.entity.item.UserItem;
 import com.yuelei.service.UserManagerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

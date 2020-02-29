@@ -1,6 +1,6 @@
 package com.yuelei.controller;
 
-import com.yuelei.entity.DataGridResult;
+import com.yuelei.entity.item.DataGridResult;
 import com.yuelei.service.LoginService;
 import com.yuelei.service.UserManagerService;
 import com.yuelei.util.WebJsonResult;

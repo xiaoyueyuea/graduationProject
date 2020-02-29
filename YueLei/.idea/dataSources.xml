@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="Lay@localhost" uuid="f17a0bf0-0667-4ede-88be-f8de1fd2804f">
+    <data-source source="LOCAL" name="lay@localhost" uuid="2cc910bc-3e2f-4359-aba3-b92e98f48c28">
       <driver-ref>mysql.8</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
-      <jdbc-url>jdbc:mysql://localhost:3306/Lay</jdbc-url>
+      <jdbc-url>jdbc:mysql://localhost:3306/lay</jdbc-url>
     </data-source>
   </component>
 </project>

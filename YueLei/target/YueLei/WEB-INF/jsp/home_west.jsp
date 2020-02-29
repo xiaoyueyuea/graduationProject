@@ -16,10 +16,10 @@
             <a href="#" class="easyui-linkbutton" data-options="toggle:true,group:'group_1',plain:true,iconCls:'icon-lock'" style="width: 100%;text-align:left;margin-top: 5px;margin-bottom: 5px;">酒店管理</a>
         </div>
 
-        <div title="基础数据" data-options="iconCls:'icon-man'" style="padding:5px;padding-left: 20px;padding-right: 20px;">
-            <a href="#" class="easyui-linkbutton" data-options="toggle:true,group:'group_1',plain:true,iconCls:'icon-man'" style="width: 100%;text-align:left;margin-top: 5px;margin-bottom: 5px;">酒店管理</a>
-            <a href="#" class="easyui-linkbutton" data-options="toggle:true,group:'group_1',plain:true,iconCls:'icon-man'" style="width: 100%;text-align:left;margin-top: 5px;margin-bottom: 5px;">酒店管理</a>
-            <a href="#" class="easyui-linkbutton" data-options="toggle:true,group:'group_1',plain:true,iconCls:'icon-man'" style="width: 100%;text-align:left;margin-top: 5px;margin-bottom: 5px;">酒店管理</a>
+        <div title="客房管理" data-options="iconCls:'icon-man'" style="padding:5px;padding-left: 20px;padding-right: 20px;">
+            <a href="#" class="easyui-linkbutton" data-options="toggle:true,group:'group_1',plain:true,iconCls:'icon-man'" style="width: 100%;text-align:left;margin-top: 5px;margin-bottom: 5px;" onclick="openPage('centerTabsId','查看客房','icon-man','roomManager/checkAllRoom')">查看客房</a>
+            <a href="#" class="easyui-linkbutton" data-options="toggle:true,group:'group_1',plain:true,iconCls:'icon-man'" style="width: 100%;text-align:left;margin-top: 5px;margin-bottom: 5px;" onclick="openPage('centerTabsId','新增客房','icon-man','roomManager/addOrEditRoom')">新增客房</a>
+            <a href="#" class="easyui-linkbutton" data-options="toggle:true,group:'group_1',plain:true,iconCls:'icon-man'" style="width: 100%;text-align:left;margin-top: 5px;margin-bottom: 5px;" onclick="openPage('centerTabsId','客房信息修改','icon-man','roomManager/editRoomInfo')">客房信息修改</a>
             <a href="#" class="easyui-linkbutton" data-options="toggle:true,group:'group_1',plain:true,iconCls:'icon-man'" style="width: 100%;text-align:left;margin-top: 5px;margin-bottom: 5px;">酒店管理</a>
         </div>
 
