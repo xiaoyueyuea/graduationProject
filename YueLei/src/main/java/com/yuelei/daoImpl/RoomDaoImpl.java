@@ -173,4 +173,125 @@ public class RoomDaoImpl implements RoomDao {
         return roomEntityList;
     }
 
+    @Override
+    public boolean editRoomInfo(String roomNo,String type,String price,String area,String remarks) {
+        try{
+            Session session =HibernateUtils.openSession();
+            Transaction transaction=session.beginTransaction();
+            RoomEntity roomEntity = null;
+            String hql="from RoomEntity where roomNo =:RoomNo";
+            Query<RoomEntity> query = session.createQuery(hql,RoomEntity.class);
+            query.setParameter("RoomNo",roomNo);
+            if(query.uniqueResult()!=null){
+                roomEntity=query.uniqueResult();
+                roomEntity.setType(type);
+                roomEntity.setPrice(price);
+                roomEntity.setArea(area);
+                roomEntity.setRemarks(remarks);
+                session.saveOrUpdate(roomEntity);
+            }
+            transaction.commit();
+            session.close();
+            return true;
+        }catch (HibernateException e){
+            return false;
+        }
+    }
+
+    @Override
+    public List<RoomEntity> getRoomListByCondition(String roomNo, String roomType) {
+        Session session=HibernateUtils.openSession();
+        Transaction transaction = session.beginTransaction();
+        String hql="from RoomEntity R where type= :RoomType";
+        List<RoomEntity> roomEntityList=new ArrayList<>();
+        if(!roomNo.isEmpty()){
+            RoomEntity roomEntity=getRoomByRoomNo(roomNo);
+            if(roomEntity!=null){
+                roomEntityList.add(roomEntity);
+            }
+        }else {
+            Query<RoomEntity> query = session.createQuery(hql,RoomEntity.class);
+            query.setParameter("RoomType",roomType);
+            roomEntityList=query.getResultList();
+        }
+
+        transaction.commit();
+        session.close();
+        return roomEntityList;
+    }
+
+    @Override
+    public RoomEntity getRoomByRoomNo(String roomNo) {
+        Session session =HibernateUtils.openSession();
+        Transaction transaction=session.beginTransaction();
+        RoomEntity roomEntity = null;
+        String hql="from RoomEntity R where roomNo =:RoomNo";
+        Query<RoomEntity> query = session.createQuery(hql,RoomEntity.class);
+        query.setParameter("RoomNo",roomNo);
+        if(query.uniqueResult()!=null){
+            roomEntity=query.uniqueResult();
+        }
+        transaction.commit();
+        session.close();
+        return roomEntity;
+    }
+
+    @Override
+    public List<RoompictureEntity> getAllRoomPicture() {
+        Session session =HibernateUtils.openSession();
+        Transaction transaction=session.beginTransaction();
+        List<RoompictureEntity> roompictureEntityList = new ArrayList<>();
+        String hql = "from RoompictureEntity";
+        Query<RoompictureEntity> query = session.createQuery(hql,RoompictureEntity.class);
+        if(query.getResultList()!=null){
+            roompictureEntityList = query.getResultList();
+        }
+        transaction.commit();
+        session.close();
+        return roompictureEntityList;
+    }
+
+    @Override
+    public RoompictureEntity getRoompictureEntityByType(String type) {
+        Session session =HibernateUtils.openSession();
+        Transaction transaction=session.beginTransaction();
+        String hql = "from RoompictureEntity rp where type =:Type";
+        RoompictureEntity roompictureEntity = null;
+        Query<RoompictureEntity> query = session.createQuery(hql,RoompictureEntity.class);
+        query.setParameter("Type",type);
+        if(query.uniqueResult()!=null){
+            roompictureEntity=query.getSingleResult();
+        }
+        transaction.commit();
+        session.close();
+        return roompictureEntity;
+    }
+
+    @Override
+    public RoomEntity getFirstRoomToOrder(String type) {
+        Session session =HibernateUtils.openSession();
+        Transaction transaction=session.beginTransaction();
+        String hql = "from RoomEntity R where type =:Type and status =:Status";
+        RoomEntity roomEntity = null;
+        Query<RoomEntity> query = session.createQuery(hql,RoomEntity.class);
+        query.setParameter("Type",type);
+        query.setParameter("Status","空闲");
+        if(query.getResultList()!=null){
+            roomEntity=query.getResultList().get(0);
+        }
+        transaction.commit();
+        session.close();
+        return roomEntity;
+    }
+
+    @Override
+    public void updateRoomStatus(String roomNo, String status) {
+        Session session =HibernateUtils.openSession();
+        Transaction transaction=session.beginTransaction();
+        RoomEntity roomEntity = getRoomByRoomNo(roomNo);
+        roomEntity.setStatus(status);
+        session.saveOrUpdate(roomEntity);
+        transaction.commit();
+        session.close();
+    }
 }

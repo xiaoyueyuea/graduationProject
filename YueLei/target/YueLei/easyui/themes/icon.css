@@ -124,3 +124,9 @@
 .icon-condition-search{
 	background:url('icons/conditionsearch.png') no-repeat center center;
 }
+.icon-previous{
+	background:url('icons/previous.png') no-repeat center center;
+}
+.icon-next{
+	background:url('icons/next.png') no-repeat center center;
+}

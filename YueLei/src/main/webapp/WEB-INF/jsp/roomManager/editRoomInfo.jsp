@@ -11,8 +11,8 @@
 <div id="room_table_toolbar" style="padding: 10px; display: inherit;">
     <input id="searchRoomByRoomNo" class="easyui-textbox" data-options="prompt:'通过房号查找'"/>
     <input id="searchRoomByType" class="easyui-textbox" data-options="prompt:'通过房型查找'"/>
-    <a class="easyui-linkbutton" data-options="iconCls:'icon-condition-search'" onclick="">搜索</a>
-    <a class="easyui-linkbutton" data-options="iconCls:'icon-clear-condition'" onclick="">清空</a>
+    <a class="easyui-linkbutton" data-options="iconCls:'icon-condition-search'" onclick="findRoomByCondition()">搜索</a>
+    <a class="easyui-linkbutton" data-options="iconCls:'icon-clear-condition'" onclick="clearCondition()">清空</a>
 </div>
 
 <table id="room_listInfo_table">
@@ -35,7 +35,7 @@
         备注：<input class="easyui-textbox" id="roomRemarks_edit" name="roomRemarks_edit" data-options="type:'text'" style="width:80%;height:30px;padding:12px"/>
     </div>
     <div style="padding: 10px;text-align: center">
-        <a class="easyui-linkbutton" onclick="" style="width:40%;height:36px;padding:12px;text-align: center">确认</a>
+        <a class="easyui-linkbutton" onclick="confirmEditRoomInfo()" style="width:40%;height:36px;padding:12px;text-align: center">确认</a>
         <a class="easyui-linkbutton" href="javascript:void(0)" onclick="$('#room_edit_dialog').dialog('close')" style="width:40%;height:36px;padding:12px;text-align: center">取消</a>
     </div>
 </div>

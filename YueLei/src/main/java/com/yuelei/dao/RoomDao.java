@@ -26,4 +26,17 @@ public interface RoomDao {
 
     List<RoomEntity> getAllRoom();
 
+    boolean editRoomInfo(String roomNo,String type,String price,String area,String remarks);
+
+    List<RoomEntity> getRoomListByCondition(String roomNo,String roomType);
+
+    RoomEntity getRoomByRoomNo(String roomNo);
+
+    List<RoompictureEntity> getAllRoomPicture();
+
+    RoompictureEntity getRoompictureEntityByType(String type);
+
+    RoomEntity getFirstRoomToOrder(String type);
+
+    void updateRoomStatus(String roomNo,String status);
 }

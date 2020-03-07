@@ -35,5 +35,7 @@
     <mapping resource="RoomEntity.hbm.xml"/>
     <mapping class="com.yuelei.entity.RoompictureEntity"/>
     <mapping resource="RoompictureEntity.hbm.xml"/>
+    <mapping class="com.yuelei.entity.OrderEntity"/>
+    <mapping resource="OrderEntity.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>

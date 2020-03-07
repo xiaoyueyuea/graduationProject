@@ -18,7 +18,7 @@
     </div>
     <div class="easyui-panel" data-options="region:'east',split:false,border:false" style=" overflow:hidden; width: 600px;">
         <div style="float: right;padding-top:10px;display: inline-block;height: 100% ">
-            <a class="easyui-linkbutton" data-options="iconCls:'icon-man',iconAlign:'left'" style="text-align: center;width: 130px;border: 0px;background: #00000000">${username}</a>
+            <a class="easyui-linkbutton" data-options="iconCls:'icon-man',iconAlign:'left'" id="currentName" style="text-align: center;width: 130px;border: 0px;background: #00000000">${username}</a>
             <a class="easyui-linkbutton" data-options="iconCls:'icon-modifypassword',iconAlign:'left'" id="modifyPassword" onclick="$('#modify_password_dialog').dialog('open')" style="background: #00000000">修改密码</a>
             <a class="easyui-linkbutton" data-options="iconCls:'icon-quit',iconAlign:'left'" style="margin-right: 10px;background: #00000000" onclick="logout()">退出</a>
         </div>

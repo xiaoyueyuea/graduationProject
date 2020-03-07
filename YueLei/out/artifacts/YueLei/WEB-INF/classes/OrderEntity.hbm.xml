@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="com.yuelei.entity.OrderEntity" table="orders" schema="lay">
+        <id name="orderId" column="order_id"/>
+        <property name="roomNo" column="room_no"/>
+        <property name="roomType" column="room_type"/>
+        <property name="roomPrice" column="room_price"/>
+        <property name="roomArea" column="room_area"/>
+        <property name="customerNickname" column="customer_nickname"/>
+        <property name="customerRealname" column="customer_realname"/>
+        <property name="phone" column="phone"/>
+        <property name="idCard" column="id_card"/>
+        <property name="startDate" column="start_date"/>
+        <property name="endDate" column="end_date"/>
+        <property name="days" column="days"/>
+        <property name="status" column="status"/>
+        <property name="remarks" column="remarks"/>
+    </class>
+</hibernate-mapping>
