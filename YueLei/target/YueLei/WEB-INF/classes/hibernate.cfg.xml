@@ -6,7 +6,7 @@
   <session-factory>
     <property name="hibernate.connection.username">root</property>
     <property name="hibernate.connection.password">123456</property>
-    <property name="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>
+      <property name="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>
       <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/lay</property>
 
       <!-- 设置连接提供者 -->
@@ -37,5 +37,9 @@
     <mapping resource="RoompictureEntity.hbm.xml"/>
     <mapping class="com.yuelei.entity.OrderEntity"/>
     <mapping resource="OrderEntity.hbm.xml"/>
+    <mapping resource="CustomerMessageEntity.hbm.xml"/>
+    <mapping class="com.yuelei.entity.CustomerMessageEntity"/>
+      <mapping class="com.yuelei.entity.FinancialManagerEntity"/>
+      <mapping resource="FinancialManagerEntity.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>

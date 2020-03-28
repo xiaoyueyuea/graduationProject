@@ -1,6 +1,7 @@
 package com.yuelei.dao;
 
 import com.yuelei.entity.UserEntity;
+import com.yuelei.entity.bean.PageResult;
 
 import java.util.List;
 
@@ -13,9 +14,9 @@ public interface UserDao {
 
     boolean insertConsume(String username,String password,String sex,String phone);
 
-    List<UserEntity> getEmployeeList();
+    PageResult<UserEntity> getEmployeeList(Integer page, Integer rows);
 
-    List<UserEntity> getConsumeList();
+    PageResult<UserEntity> getConsumeList(Integer page, Integer rows);
 
     boolean updateEmployeeInfo(String username,String sex,String phone,int admin);
 

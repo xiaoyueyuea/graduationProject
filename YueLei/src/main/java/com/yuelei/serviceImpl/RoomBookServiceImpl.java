@@ -6,7 +6,7 @@ import com.yuelei.dao.UserDao;
 import com.yuelei.entity.RoomEntity;
 import com.yuelei.entity.RoompictureEntity;
 import com.yuelei.entity.UserEntity;
-import com.yuelei.entity.item.OrderInfoItem;
+import com.yuelei.entity.bean.OrderInfoItem;
 import com.yuelei.service.RoomBookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

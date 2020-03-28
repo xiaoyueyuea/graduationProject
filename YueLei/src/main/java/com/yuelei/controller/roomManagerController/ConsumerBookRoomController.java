@@ -1,9 +1,10 @@
 package com.yuelei.controller.roomManagerController;
 
+import com.yuelei.dao.OrderDao;
 import com.yuelei.dao.RoomDao;
 import com.yuelei.entity.RoomEntity;
 import com.yuelei.entity.UserEntity;
-import com.yuelei.entity.item.OrderInfoItem;
+import com.yuelei.entity.bean.OrderInfoItem;
 import com.yuelei.service.RoomBookService;
 import com.yuelei.util.Constants;
 import com.yuelei.util.WebJsonResult;
@@ -30,6 +31,9 @@ public class ConsumerBookRoomController {
 
     @Autowired(required = false)
     private RoomDao roomDao;
+
+    @Autowired(required = false)
+    private OrderDao orderDao;
 
     @RequestMapping(path = "/consumerBookRoomInformation")
     public String consumerBookRoomInformation(Model model){
@@ -139,6 +143,27 @@ public class ConsumerBookRoomController {
                                             @PathVariable String remarks){
         if(roomBookService.createOrder(roomNo,roomType,roomPrice,roomArea,currentUsername,realName,phone,idCard,startTime,endTime,days,remarks)){
             roomDao.updateRoomStatus(roomNo,Constants.STATUS_ROOM_SCHEDULED);//更改房间状态
+            return "success";
+        }
+        return "fail";
+    }
+
+    @RequestMapping(path = "/notOrderCheckedIn_{roomNo}_{roomType}_{roomPrice}_{roomArea}_{currentUsername}_{realName}_{phone}_{idCard}_{startTime}_{endTime}_{days}_{remarks}")
+    public @ResponseBody String notOrderCheckedIn(@PathVariable String roomNo,
+                                            @PathVariable String roomType,
+                                            @PathVariable String roomPrice,
+                                            @PathVariable String roomArea,
+                                            @PathVariable String currentUsername,
+                                            @PathVariable String realName,
+                                            @PathVariable String phone,
+                                            @PathVariable String idCard,
+                                            @PathVariable Date startTime,
+                                            @PathVariable Date endTime,
+                                            @PathVariable String days,
+                                            @PathVariable String remarks){
+        if(roomBookService.createOrder(roomNo,roomType,roomPrice,roomArea,currentUsername,realName,phone,idCard,startTime,endTime,days,remarks)){
+            roomDao.updateRoomStatus(roomNo,Constants.STATUS_ROOM_APPLY);//到店办理入住的顾客直接入住
+            orderDao.updateOrderStatus(roomNo,Constants.STATUS_ORDER_CHECKED);//订单直接变为已入住状态
             return "success";
         }
         return "fail";

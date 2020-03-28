@@ -3,7 +3,8 @@ package com.yuelei.serviceImpl;
 import com.yuelei.dao.RoomDao;
 import com.yuelei.entity.RoomEntity;
 import com.yuelei.entity.RoompictureEntity;
-import com.yuelei.entity.item.RoomItem;
+import com.yuelei.entity.bean.PageResult;
+import com.yuelei.entity.bean.RoomItem;
 import com.yuelei.service.RoomManagerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -48,8 +49,8 @@ public class RoomManagerServiceImpl implements RoomManagerService {
     }
 
     @Override
-    public List<RoomEntity> getAllRoom() {
-        return roomDao.getAllRoom();
+    public PageResult<RoomEntity> getAllRoom(Integer page, Integer rows) {
+        return roomDao.getAllRoom(page,rows);
     }
 
     @Override

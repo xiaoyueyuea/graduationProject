@@ -19,6 +19,7 @@
     <div class="easyui-panel" data-options="region:'east',split:false,border:false" style=" overflow:hidden; width: 600px;">
         <div style="float: right;padding-top:10px;display: inline-block;height: 100% ">
             <a class="easyui-linkbutton" data-options="iconCls:'icon-man',iconAlign:'left'" id="currentName" style="text-align: center;width: 130px;border: 0px;background: #00000000">${username}</a>
+            <a class="easyui-linkbutton" data-options="iconCls:'icon-my-order',iconAlign:'left'" onclick="$('#myOrder_window').window('open')" style="background: #00000000">我的订单</a>
             <a class="easyui-linkbutton" data-options="iconCls:'icon-modifypassword',iconAlign:'left'" id="modifyPassword" onclick="$('#modify_password_dialog').dialog('open')" style="background: #00000000">修改密码</a>
             <a class="easyui-linkbutton" data-options="iconCls:'icon-quit',iconAlign:'left'" style="margin-right: 10px;background: #00000000" onclick="logout()">退出</a>
         </div>
@@ -43,4 +44,10 @@
         <a class="easyui-linkbutton" data-options="iconCls:'icon-ok'" onclick="modifyPassword()" style="width:80px">提交</a>
         <a class="easyui-linkbutton" data-options="iconCls:'icon-cancel'" href="javascript:void(0)" onclick="$('#modify_password_dialog').dialog('close')" style="width:80px">取消</a>
     </div>
+</div>
+
+<div class="easyui-window" title="我的订单" id="myOrder_window" data-options="conCls:'icon-save',closed:true,modal:true,collapsible:false,minimizable:false,maximizable:false,resizable:false" style="width:1000px;height:560px;padding:10px;">
+    <table id="myOrder_table">
+
+    </table>
 </div>

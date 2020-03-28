@@ -28,7 +28,7 @@
     </form>
 
     <div style="text-align: center; padding: 15px;">
-        <a class="easyui-linkbutton" style="width:40%;height:36px;padding:12px" onclick="confirmUpdatePicture()">确定</a>
-        <a class="easyui-linkbutton" style="width:40%;height:36px;padding:12px" onclick="cancelUpdatePicture()">取消</a>
+        <a class="easyui-linkbutton" data-options="iconCls:'icon-ok'" style="width:40%;height:36px;padding:12px" onclick="confirmUpdatePicture()">确定</a>
+        <a class="easyui-linkbutton" data-options="iconCls:'icon-cancel'" style="width:40%;height:36px;padding:12px" onclick="cancelUpdatePicture()">取消</a>
     </div>
 </div>

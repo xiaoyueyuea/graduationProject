@@ -2,7 +2,8 @@ package com.yuelei.service;
 
 import com.yuelei.entity.RoomEntity;
 import com.yuelei.entity.RoompictureEntity;
-import com.yuelei.entity.item.RoomItem;
+import com.yuelei.entity.bean.PageResult;
+import com.yuelei.entity.bean.RoomItem;
 
 import java.util.List;
 
@@ -13,7 +14,7 @@ public interface RoomManagerService {
 
     boolean editRoomInfo(String roomNo,String type,String price,String area,String remarks);
 
-    List<RoomEntity> getAllRoom();
+    PageResult<RoomEntity> getAllRoom(Integer page, Integer rows);
 
     List<RoomItem> getRoomEditListByCondition(String roomNo,String type);
 

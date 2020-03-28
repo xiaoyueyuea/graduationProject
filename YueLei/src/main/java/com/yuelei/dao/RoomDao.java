@@ -2,6 +2,7 @@ package com.yuelei.dao;
 
 import com.yuelei.entity.RoomEntity;
 import com.yuelei.entity.RoompictureEntity;
+import com.yuelei.entity.bean.PageResult;
 
 import java.util.List;
 
@@ -24,7 +25,7 @@ public interface RoomDao {
 
     void createNewRoomType(String type);
 
-    List<RoomEntity> getAllRoom();
+    PageResult<RoomEntity> getAllRoom(Integer page, Integer rows);
 
     boolean editRoomInfo(String roomNo,String type,String price,String area,String remarks);
 
@@ -38,5 +39,7 @@ public interface RoomDao {
 
     RoomEntity getFirstRoomToOrder(String type);
 
-    void updateRoomStatus(String roomNo,String status);
+    boolean updateRoomStatus(String roomNo,String status);
+
+    List<RoomEntity> getRoomListByConditionToCheck(String roomNo, String roomType,String status);
 }

@@ -2,7 +2,8 @@ package com.yuelei.serviceImpl;
 
 import com.yuelei.dao.UserDao;
 import com.yuelei.entity.UserEntity;
-import com.yuelei.entity.item.UserItem;
+import com.yuelei.entity.bean.PageResult;
+import com.yuelei.entity.bean.UserItem;
 import com.yuelei.service.UserManagerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,33 +18,23 @@ public class UserManagerServiceImpl implements UserManagerService {
     private UserDao userDao;
 
     @Override
-    public List<UserItem> getAllEmployee() {
-        List<UserItem> userItemList = new ArrayList<>();
-        for(UserEntity user : userDao.getEmployeeList()){
-            final UserItem userItem = new UserItem();
-            userItem.setUserId(user.getUserId());
-            userItem.setUsername(user.getUsername());
-            userItem.setSex(user.getSex());
-            userItem.setPhone(user.getPhone());
-            userItem.setAdmin(user.getAdmin());
-            userItemList.add(userItem);
-        }
-        return userItemList;
+    public PageResult<UserEntity> getAllEmployee(Integer page, Integer rows) {
+        PageResult<UserEntity> userEntityPageResult = new PageResult<>();
+        userEntityPageResult.setContent(userDao.getEmployeeList(page,rows).getContent());
+        userEntityPageResult.setTotal(userDao.getEmployeeList(page,rows).getTotal());
+        userEntityPageResult.setSize(rows);
+        userEntityPageResult.setPage(page);
+        return userEntityPageResult;
     }
 
     @Override
-    public List<UserItem> getAllConsume() {
-        List<UserItem> userItemList = new ArrayList<>();
-        for(UserEntity user : userDao.getConsumeList()){
-            final UserItem userItem = new UserItem();
-            userItem.setUserId(user.getUserId());
-            userItem.setUsername(user.getUsername());
-            userItem.setSex(user.getSex());
-            userItem.setPhone(user.getPhone());
-            userItem.setAdmin(user.getAdmin());
-            userItemList.add(userItem);
-        }
-        return userItemList;
+    public PageResult<UserEntity> getAllConsume(Integer page, Integer rows) {
+        PageResult<UserEntity> userEntityPageResult = new PageResult<>();
+        userEntityPageResult.setContent(userDao.getConsumeList(page,rows).getContent());
+        userEntityPageResult.setTotal(userDao.getConsumeList(page,rows).getTotal());
+        userEntityPageResult.setSize(rows);
+        userEntityPageResult.setPage(page);
+        return userEntityPageResult;
     }
 
     @Override

@@ -1,6 +1,6 @@
 package com.yuelei.controller;
 
-import com.yuelei.entity.item.DataGridResult;
+import com.yuelei.entity.bean.DataGridResult;
 import com.yuelei.service.LoginService;
 import com.yuelei.service.UserManagerService;
 import com.yuelei.util.WebJsonResult;
@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 
@@ -28,10 +29,10 @@ public class UserManagerController {
 
     @RequestMapping(path = "/getEmployeeList")
     public @ResponseBody
-    WebJsonResult getEmployeeList(){
+    WebJsonResult getEmployeeList(@RequestParam("page") Integer page,@RequestParam("rows") Integer rows){
         DataGridResult dataGridResult=new DataGridResult();
-        dataGridResult.setRows(userManagerService.getAllEmployee());
-        dataGridResult.setTotal(userManagerService.getAllEmployee().size());
+        dataGridResult.setRows(userManagerService.getAllEmployee(page,rows).getContent());
+        dataGridResult.setTotal(userManagerService.getAllEmployee(page,rows).getTotal());
         return WebJsonResult.newSuccess(dataGridResult);
     }
 
@@ -41,10 +42,10 @@ public class UserManagerController {
     }
 
     @RequestMapping(path = "/getConsumeList")
-    public @ResponseBody WebJsonResult getConsumeList(){
+    public @ResponseBody WebJsonResult getConsumeList(@RequestParam("page") Integer page,@RequestParam("rows") Integer rows){
         DataGridResult dataGridResult=new DataGridResult();
-        dataGridResult.setRows(userManagerService.getAllConsume());
-        dataGridResult.setTotal(userManagerService.getAllConsume().size());
+        dataGridResult.setRows(userManagerService.getAllConsume(page,rows).getContent());
+        dataGridResult.setTotal(userManagerService.getAllConsume(page,rows).getTotal());
         return WebJsonResult.newSuccess(dataGridResult);
     }
 

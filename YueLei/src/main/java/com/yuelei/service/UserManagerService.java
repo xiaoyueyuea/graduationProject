@@ -1,14 +1,16 @@
 package com.yuelei.service;
 
-import com.yuelei.entity.item.UserItem;
+import com.yuelei.entity.UserEntity;
+import com.yuelei.entity.bean.PageResult;
+import com.yuelei.entity.bean.UserItem;
 
 import java.util.List;
 
 public interface UserManagerService {
 
-    List<UserItem> getAllEmployee();
+    PageResult<UserEntity> getAllEmployee(Integer page, Integer rows);
 
-    List<UserItem> getAllConsume();
+    PageResult<UserEntity> getAllConsume(Integer page, Integer rows);
 
     boolean registerConsume(String username, String password, String sex, String phone);
 

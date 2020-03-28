@@ -16,6 +16,84 @@ $(function () {
     });
 });
 
+$(function () {
+    loadMyOrderTable();
+});
+
+function loadMyOrderTable() {
+    var username = $("#currentName").text().trim();
+
+    var MyOrderListDataOptions = {
+        fit : true,
+        border : true,
+        rownumbers : true,
+        singleSelect : true,
+        pagination : true,
+        pageSize : 4,
+        pageNumber : 1,
+        pageList : [ 4, 8, 12 ],
+        striped :true,
+        fitColumns : true,
+        columns:[[
+            {field:"roomNo",title:"房号",width:40,align:"center",hidden:true},
+            {field:"roomType",title:"房型",width:40,align:"center"},
+            {field:"picture",title:"图片",width:50,align:"center",formatter: function (value, row, index) {
+                    var str1="consumerBookRoom/getImage_"+row.picture;
+                    return "<img src='"+str1+"' width='150' height='100'/>";
+                }},
+            {field:"roomPrice",title:"价格",width:40,align:"center"},
+            {field:"startDate",title:"入住时间",width:50,align:"center",sortable:true,formatter :function (value,row,index) {
+                    return (new Date(value)).toLocaleDateString();
+                }},
+            {field:"endDate",title:"离店时间",width:40,align:"center",sortable:true,formatter :function (value,row,index) {
+                    return (new Date(value)).toLocaleDateString();
+                }},
+            {field:"days",title:"居住天数",width:40,align:"center"},
+            {field:"status",title:"订单状态",width:40,align:"center",sortable:true},
+            {field: "action6", title: "操作", width: 40, align: "center", formatter: function (value, row, index) {
+                    if(row.status=="未入住"){
+                        return "<a href='#' onclick='cancelOrder(this)' data-roomNo='"
+                            + row.roomNo + "' data-startDate='"
+                            + row.startDate + "'>退订</a>";
+                    }else {
+                        return "";
+                    }
+                }
+            }
+        ]],
+        url : "orderManager/getMyOrderByCustomer_"+username,
+        method : "GET",
+        loadFilter : function(data) {
+            return {
+                "total" : data.state != 0 ? 0 : data.data.total,
+                "rows" : data.state != 0 ? [] : data.data.rows
+            }
+        }
+    };
+
+    $("#myOrder_table").datagrid(MyOrderListDataOptions);
+}
+
+function cancelOrder(pram) {
+    var roomNo =$(pram).attr("data-roomNo");
+    var startDate=$(pram).attr("data-startDate");
+    var date = new Date();
+    var currentTime = new Date((date.getFullYear()+'-'+(date.getMonth()+1)+'-'+date.getDate()).replace(/-/g, '/')).getTime();
+    if(startDate <= currentTime){
+        $.messager.alert("温馨提示","对不起，退订时间已过，无法取消该订单");
+        return;
+    }
+    $.messager.confirm("温馨提示","您确定要取消该订单吗?",function () {
+        $.post("orderManager/cancelOrder_"+roomNo,{},function (res) {
+            if(res=="success"){
+                $.messager.alert("温馨提示","您的订单已成功取消");
+            }else {
+                $.messager.alert("温馨提示","系统异常，请联系酒店工作人员");
+            }
+        });
+    });
+}
+
 function logout() {
     $.messager.confirm("温馨提示","您确定要退出吗?",function (r) {
         if(r){

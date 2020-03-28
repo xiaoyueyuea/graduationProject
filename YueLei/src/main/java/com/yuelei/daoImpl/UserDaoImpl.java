@@ -2,6 +2,7 @@ package com.yuelei.daoImpl;
 
 import com.yuelei.dao.UserDao;
 import com.yuelei.entity.UserEntity;
+import com.yuelei.entity.bean.PageResult;
 import com.yuelei.util.HibernateUtils;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -78,28 +79,44 @@ public class UserDaoImpl implements UserDao {
 
 
     @Override
-    public List<UserEntity> getEmployeeList() {
+    public PageResult<UserEntity> getEmployeeList(Integer page, Integer rows) {
         Session session=HibernateUtils.openSession();
         Transaction transaction = session.beginTransaction();
+        int currentPage = (page == null || page == 0) ? 1: page;//第几页
+        int pageSize = (rows == null || rows == 0) ? 20: rows;//每页多少行
+        PageResult<UserEntity> userEntityPageResult = new PageResult<>();
         String hql="from UserEntity u where admin= 0 or admin=1";
         Query<UserEntity> query = session.createQuery(hql,UserEntity.class);
-        List<UserEntity> employeeList = query.getResultList();
+        int total = query.getResultList().size();
+        List<UserEntity> employeeList = query.setFirstResult((currentPage - 1) * pageSize).setMaxResults(pageSize).list();
+        userEntityPageResult.setPage(page);
+        userEntityPageResult.setSize(rows);
+        userEntityPageResult.setTotal(total);
+        userEntityPageResult.setContent(employeeList);
         transaction.commit();
         session.close();
-        return employeeList;
+        return userEntityPageResult;
     }
 
     @Override
-    public List<UserEntity> getConsumeList() {
+    public PageResult<UserEntity> getConsumeList(Integer page, Integer rows) {
         Session session=HibernateUtils.openSession();
         Transaction transaction = session.beginTransaction();
+        int currentPage = (page == null || page == 0) ? 1: page;//第几页
+        int pageSize = (rows == null || rows == 0) ? 20: rows;//每页多少行
+        PageResult<UserEntity> userEntityPageResult = new PageResult<>();
         String hql="from UserEntity u where admin= :Admin";
         Query<UserEntity> query = session.createQuery(hql,UserEntity.class);
         query.setParameter("Admin",2);
-        List<UserEntity> consumeList = query.getResultList();
+        int total = query.getResultList().size();
+        List<UserEntity> consumeList = query.setFirstResult((currentPage - 1) * pageSize).setMaxResults(pageSize).list();
+        userEntityPageResult.setContent(consumeList);
+        userEntityPageResult.setTotal(total);
+        userEntityPageResult.setPage(page);
+        userEntityPageResult.setSize(rows);
         transaction.commit();
         session.close();
-        return consumeList;
+        return userEntityPageResult;
     }
 
     @Override

@@ -3,6 +3,8 @@ package com.yuelei.daoImpl;
 import com.yuelei.dao.RoomDao;
 import com.yuelei.entity.RoomEntity;
 import com.yuelei.entity.RoompictureEntity;
+import com.yuelei.entity.UserEntity;
+import com.yuelei.entity.bean.PageResult;
 import com.yuelei.util.HibernateUtils;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -159,18 +161,25 @@ public class RoomDaoImpl implements RoomDao {
     }
 
     @Override
-    public List<RoomEntity> getAllRoom() {
+    public PageResult<RoomEntity> getAllRoom(Integer page, Integer rows) {
         Session session =HibernateUtils.openSession();
         Transaction transaction=session.beginTransaction();
-        List<RoomEntity> roomEntityList = null;
+        int currentPage = (page == null || page == 0) ? 1: page;//第几页
+        int pageSize = (rows == null || rows == 0) ? 20: rows;//每页多少行
+        PageResult<RoomEntity> roomEntityPageResult = new PageResult<>();
+        int total=0;
+        List<RoomEntity> roomEntityList = new ArrayList<>();
         String hql="from RoomEntity";
         Query<RoomEntity> query = session.createQuery(hql,RoomEntity.class);
         if(query.getResultList()!=null){
-            roomEntityList=query.list();
+            total=query.getResultList().size();
+            roomEntityList = query.setFirstResult((currentPage - 1) * pageSize).setMaxResults(pageSize).list();
         }
+        roomEntityPageResult.setContent(roomEntityList);
+        roomEntityPageResult.setTotal(total);
         transaction.commit();
         session.close();
-        return roomEntityList;
+        return roomEntityPageResult;
     }
 
     @Override
@@ -200,24 +209,29 @@ public class RoomDaoImpl implements RoomDao {
 
     @Override
     public List<RoomEntity> getRoomListByCondition(String roomNo, String roomType) {
-        Session session=HibernateUtils.openSession();
-        Transaction transaction = session.beginTransaction();
-        String hql="from RoomEntity R where type= :RoomType";
-        List<RoomEntity> roomEntityList=new ArrayList<>();
-        if(!roomNo.isEmpty()){
-            RoomEntity roomEntity=getRoomByRoomNo(roomNo);
-            if(roomEntity!=null){
-                roomEntityList.add(roomEntity);
+        try{
+            Session session=HibernateUtils.openSession();
+            Transaction transaction = session.beginTransaction();
+            String hql="from RoomEntity R where type= :RoomType";
+            List<RoomEntity> roomEntityList=new ArrayList<>();
+            if(!roomNo.isEmpty()){
+                RoomEntity roomEntity=getRoomByRoomNo(roomNo);
+                if(roomEntity!=null){
+                    roomEntityList.add(roomEntity);
+                }
+            }else {
+                Query<RoomEntity> query = session.createQuery(hql,RoomEntity.class);
+                query.setParameter("RoomType",roomType);
+                roomEntityList=query.getResultList();
             }
-        }else {
-            Query<RoomEntity> query = session.createQuery(hql,RoomEntity.class);
-            query.setParameter("RoomType",roomType);
-            roomEntityList=query.getResultList();
-        }
 
-        transaction.commit();
-        session.close();
-        return roomEntityList;
+            transaction.commit();
+            session.close();
+            return roomEntityList;
+        }catch (HibernateException e){
+            System.out.println("查询失败");
+            return null;
+        }
     }
 
     @Override
@@ -285,13 +299,58 @@ public class RoomDaoImpl implements RoomDao {
     }
 
     @Override
-    public void updateRoomStatus(String roomNo, String status) {
-        Session session =HibernateUtils.openSession();
-        Transaction transaction=session.beginTransaction();
-        RoomEntity roomEntity = getRoomByRoomNo(roomNo);
-        roomEntity.setStatus(status);
-        session.saveOrUpdate(roomEntity);
-        transaction.commit();
-        session.close();
+    public boolean updateRoomStatus(String roomNo, String status) {
+        try{
+            Session session =HibernateUtils.openSession();
+            Transaction transaction=session.beginTransaction();
+            RoomEntity roomEntity = getRoomByRoomNo(roomNo);
+            roomEntity.setStatus(status);
+            session.saveOrUpdate(roomEntity);
+            transaction.commit();
+            session.close();
+            return true;
+        }catch (HibernateException e){
+            return false;
+        }
+    }
+
+    @Override
+    public List<RoomEntity> getRoomListByConditionToCheck(String roomNo, String roomType,String status) {
+        String[] pram = new String[3];
+        int i=0;
+        try{
+            Session session=HibernateUtils.openSession();
+            Transaction transaction = session.beginTransaction();
+            String hql="from RoomEntity R where 1=1";
+            List<RoomEntity> roomEntityList=new ArrayList<>();
+
+            if(! roomNo.isEmpty()){
+                hql+=" and roomNo =?"+i;
+                pram[i++]=roomNo;
+            }
+            if(! roomType.isEmpty()){
+                hql+=" and type =?"+i;
+                pram[i++]=roomType;
+            }
+            if(! status.isEmpty()){
+                hql+=" and status =?"+i;
+                pram[i++]=status;
+            }
+
+            Query<RoomEntity> query = session.createQuery(hql,RoomEntity.class);
+            for(int j=0;j<i;j++){
+                query.setParameter(j,pram[j]);
+            }
+
+            if(query.getResultList()!=null){
+                roomEntityList=query.getResultList();
+            }
+            transaction.commit();
+            session.close();
+            return roomEntityList;
+        }catch (HibernateException e){
+            System.out.println("查询失败");
+            return null;
+        }
     }
 }

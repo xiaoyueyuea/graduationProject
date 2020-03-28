@@ -3,7 +3,7 @@ package com.yuelei.controller.roomManagerController;
 import com.yuelei.dao.RoomDao;
 import com.yuelei.entity.RoomEntity;
 import com.yuelei.entity.RoompictureEntity;
-import com.yuelei.entity.item.DataGridResult;
+import com.yuelei.entity.bean.DataGridResult;
 import com.yuelei.service.RoomBookService;
 import com.yuelei.service.RoomManagerService;
 import com.yuelei.util.Constants;
@@ -44,6 +44,7 @@ public class RoomManagerController {
             types.add(roomEntity.getType());
         }
         model.asMap().put("types_checkRoom",types);
+
         return "roomManager/checkRoom";
     }
 
@@ -53,7 +54,13 @@ public class RoomManagerController {
     }
 
     @RequestMapping(path = "/editRoomInfo")
-    public String editRoomInfo(){
+    public String editRoomInfo(Model model){
+        List<RoomEntity> roomEntityList = roomBookService.getAllTypeRoomInfo();
+        List<String> types=new ArrayList<>();
+        for(RoomEntity roomEntity : roomEntityList){
+            types.add(roomEntity.getType());
+        }
+        model.asMap().put("types_editRoomInfo",types);
         return "roomManager/editRoomInfo";
     }
 
@@ -116,10 +123,10 @@ public class RoomManagerController {
 
     @RequestMapping(path = "/getRoomList")
     public @ResponseBody
-    WebJsonResult getRoomList(){
+    WebJsonResult getRoomList(@RequestParam("page") Integer page,@RequestParam("rows") Integer rows){
         DataGridResult dataGridResult=new DataGridResult();
-        dataGridResult.setRows(roomManagerService.getAllRoom());
-        dataGridResult.setTotal(roomManagerService.getAllRoom().size());
+        dataGridResult.setRows(roomManagerService.getAllRoom(page,rows).getContent());
+        dataGridResult.setTotal(roomManagerService.getAllRoom(page,rows).getTotal());
         return WebJsonResult.newSuccess(dataGridResult);
     }
 
@@ -166,9 +173,9 @@ public class RoomManagerController {
         return WebJsonResult.newSuccess(dataGridResult);
     }
 
-    @RequestMapping(path = "/getRoomInfoToCheckByCondition_{roomNo}_{type}")
-    public @ResponseBody WebJsonResult getRoomInfoToCheckByCondition(@PathVariable String roomNo,@PathVariable String type){
-        List<RoomEntity> roomEntityList = roomDao.getRoomListByCondition(roomNo,type);
+    @RequestMapping(path = "/getRoomInfoToCheckByCondition_{roomNo}_{type}_{status}")
+    public @ResponseBody WebJsonResult getRoomInfoToCheckByCondition(@PathVariable String roomNo,@PathVariable String type,@PathVariable String status){
+        List<RoomEntity> roomEntityList = roomDao.getRoomListByConditionToCheck(roomNo,type,status);
         DataGridResult dataGridResult = new DataGridResult();
         dataGridResult.setRows(roomEntityList);
         dataGridResult.setTotal(roomEntityList.size());

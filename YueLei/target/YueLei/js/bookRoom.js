@@ -153,7 +153,6 @@ function commitOrder() {
     var days=0;
     var remarks=$("#remarks_createOrder").textbox("getValue");
 
-    console.log(startTime+"#########"+endTime);
 
     $.ajaxSettings.async=false;
     $.post("consumerBookRoom/getCurrentUsername",{},function (res) {
@@ -169,7 +168,8 @@ function commitOrder() {
 
     var st=startTime.replace(/-/g, '/');
     var et=endTime.replace(/-/g, '/');
-    var currentTime=new Date().getTime();
+    var date=new Date();
+    var currentTime = new Date((date.getFullYear()+'-'+(date.getMonth()+1)+'-'+date.getDay()).replace(/-/g, '/')).getTime();
 
     var ms = new Date(et).getTime()-new Date(st).getTime();
     days=Math.ceil(ms / 1000 / 24 / 60 / 60);

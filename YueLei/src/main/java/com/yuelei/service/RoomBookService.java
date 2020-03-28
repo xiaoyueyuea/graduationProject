@@ -1,7 +1,7 @@
 package com.yuelei.service;
 
 import com.yuelei.entity.RoomEntity;
-import com.yuelei.entity.item.OrderInfoItem;
+import com.yuelei.entity.bean.OrderInfoItem;
 
 import java.sql.Date;
 import java.util.List;
