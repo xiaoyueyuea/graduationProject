@@ -1,5 +1,6 @@
 package com.yuelei.controller;
 
+import com.yuelei.entity.UserEntity;
 import com.yuelei.entity.bean.DataGridResult;
 import com.yuelei.service.LoginService;
 import com.yuelei.service.UserManagerService;
@@ -10,6 +11,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import javax.servlet.http.HttpSession;
 
 
 @Controller
@@ -62,7 +65,12 @@ public class UserManagerController {
 
     @RequestMapping(path = "/updateEmployeeInfo_{name}_{sex}_{phone}_{admin}")
     public @ResponseBody
-    String editEmployeeInfo(@PathVariable String name,@PathVariable String sex,@PathVariable String phone,@PathVariable int admin){
+    String editEmployeeInfo(@PathVariable String name, @PathVariable String sex, @PathVariable String phone, @PathVariable int admin, HttpSession session){
+        UserEntity user=(UserEntity)session.getAttribute("user");
+        if(user.getAdmin()!=0){
+            return "noPermission";
+        }
+
         if(userManagerService.editEmployeeInfo(name,sex,phone,admin)){
             return "success";
         }

@@ -12,13 +12,13 @@
 <div id="checkOnGoingOrder_table_toolbar" style="padding: 10px; display: inherit;">
     <input id="searchOnGoingOrderByCustomerName" class="easyui-textbox" data-options="prompt:'通过用户姓名查找'"/>
     <input id="searchOnGoingOrderByCustomerPhone" class="easyui-textbox" data-options="prompt:'通过用户电话查找'"/>
-    <select class="easyui-combobox" id="selectType_checkOnGoingOrder" data-options="limitToList:true,editable:false,panelHeight:'auto'" style="width: 150px">
+    <select class="easyui-combobox" id="selectType_checkOnGoingOrder" data-options="limitToList:true,editable:false,panelHeight:'auto'" style="width: 120px">
         <option value="" selected="selected">全部</option>
         <c:forEach items="${types_checkOnGoingOrder}" var="type">
             <option value="${type}">${type}</option>
         </c:forEach>
     </select>
-    <select class="easyui-combobox" id="searchOnGoingOrderByStatus" data-options="limitToList:true,editable:false,panelHeight:'auto'" style="width: 150px">
+    <select class="easyui-combobox" id="searchOnGoingOrderByStatus" data-options="limitToList:true,editable:false,panelHeight:'auto'" style="width: 120px">
         <option value="" selected="selected">全部</option>
         <c:forEach items="${status_checkOnGoingOrder}" var="status">
             <option value="${status}">${status}</option>

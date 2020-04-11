@@ -181,7 +181,8 @@ function employeeCommitOrderForCustomer() {
 
     var sd=startDate.replace(/-/g, '/');
     var ed=endDate.replace(/-/g, '/');
-    var currentTime=new Date().getTime();
+    var date=new Date();
+    var currentTime=new Date((date.getFullYear()+'-'+(date.getMonth()+1)+'-'+date.getDay()).replace(/-/g, '/')).getTime();
 
     var ms = new Date(ed).getTime()-new Date(sd).getTime();
     days=Math.ceil(ms / 1000 / 24 / 60 / 60);

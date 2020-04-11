@@ -6,7 +6,7 @@ $(function () {
             $("#room_edit_dialog").dialog("open");
             $("#roomNo_edit").textbox('setValue',rowData.roomNo);
             $("#roomType_edit").textbox('setValue',rowData.type);
-            $("#roomPrice_edit").textbox('setValue',rowData.price);
+            $("#roomPrice_edit").numberbox('setValue',rowData.price);
             $("#roomArea_edit").textbox('setValue',rowData.area);
             $("#roomRemarks_edit").textbox('setValue',rowData.remarks);
         }
@@ -17,7 +17,7 @@ $(function () {
 function confirmAddOrEdit() {
     var roomNo = $("#room_no").textbox('getValue');
     var roomType = $("#room_type").textbox('getValue');
-    var roomPrice = $("#room_price").textbox('getValue');
+    var roomPrice = $("#room_price").numberbox('getValue');
     var roomArea = $("#room_area").textbox('getValue');
     var roomRemarks = $("#room_remarks").textbox('getValue');
 
@@ -116,7 +116,7 @@ function editRoomInfoButton(parm) {
     $("#room_edit_dialog").dialog("open");
     $("#roomNo_edit").textbox('setValue',roomNo);
     $("#roomType_edit").textbox('setValue',type);
-    $("#roomPrice_edit").textbox('setValue',price);
+    $("#roomPrice_edit").numberbox('setValue',price);
     $("#roomArea_edit").textbox('setValue',area);
     $("#roomRemarks_edit").textbox('setValue',remarks);
 }
@@ -124,7 +124,7 @@ function editRoomInfoButton(parm) {
 function confirmEditRoomInfo() {
     var roomNo = $("#roomNo_edit").textbox('getValue');
     var roomType = $("#roomType_edit").textbox('getValue');
-    var roomPrice = $("#roomPrice_edit").textbox('getValue');
+    var roomPrice = $("#roomPrice_edit").numberbox('getValue');
     var roomArea = $("#roomArea_edit").textbox('getValue');
     var roomRemarks = $("#roomRemarks_edit").textbox('getValue');
 

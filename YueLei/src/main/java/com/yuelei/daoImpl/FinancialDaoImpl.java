@@ -32,7 +32,9 @@ public class FinancialDaoImpl implements FinancialDao {
             financialManagerEntity.setRoomCharge(String.valueOf(Integer.parseInt(orderEntity.getDays()) * Integer.parseInt(orderEntity.getRoomPrice())));
             if(!orderEntity.getRemarks().isEmpty() && !orderEntity.getRemarks().equals(Constants.REMARKS_ORDER_OVERDUE)){
                 int index = orderEntity.getRemarks().lastIndexOf(":");
-                financialManagerEntity.setPriceDifference(orderEntity.getRemarks().substring(index+1));
+                if(index > 0){
+                    financialManagerEntity.setPriceDifference(orderEntity.getRemarks().substring(index+1));
+                }
             }
             if(financialManagerEntity.getPriceDifference().isEmpty()){
                 financialManagerEntity.setPriceDifference("0");

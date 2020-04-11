@@ -7,7 +7,8 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/addOrEditRoom.js"></script>
-    <form id="addOrEditRoomForm" method="post" enctype="multipart/form-data" style="margin-top: 100px">
+<div style="margin-top: 100px;width:auto;border:2px solid #CCE6FF">
+    <form id="addOrEditRoomForm" method="post" enctype="multipart/form-data" style="margin-top: 10px;margin-left: 10px">
         <div style="text-align: center; padding: 15px">
             <input class="easyui-textbox" id="room_no" name="room_no" data-options="type:'text',required:true,validType:'nameTooLong',validateOnCreate:false,validateOnBlur:true,iconCls:'icon-man',prompt:'请输入房号(4位数字)'" style="width:40%;height:30px;padding:12px"/>
         </div>
@@ -15,10 +16,10 @@
             <input class="easyui-textbox" id="room_type" name="room_type" data-options="type:'text',required:true,validType:'nameTooLong',validateOnCreate:false,validateOnBlur:true,iconCls:'icon-man',prompt:'请输入房型'" style="width:40%;height:30px;padding:12px"/>
         </div>
         <div style="text-align: center; padding: 15px">
-            <input class="easyui-textbox" id="room_price" name="room_price" data-options="type:'text',required:true,validType:'nameTooLong',validateOnCreate:false,validateOnBlur:true,iconCls:'icon-man',prompt:'请输入价格'" style="width:40%;height:30px;padding:12px"/>
+            <input class="easyui-numberbox" id="room_price" name="room_price" data-options="type:'text',min:0,precision:1,required:true,validType:'nameTooLong',validateOnCreate:false,validateOnBlur:true,iconCls:'icon-man',prompt:'请输入价格'" style="width:40%;height:30px;padding:12px"/>
         </div>
         <div style="text-align: center; padding: 15px">
-            <input class="easyui-textbox" id="room_area" name="room_area" data-options="type:'text',required:true,validType:'nameTooLong',validateOnCreate:false,validateOnBlur:true,iconCls:'icon-man',prompt:'请输入面积'" style="width:40%;height:30px;padding:12px"/>
+            <input class="easyui-numberbox" id="room_area" name="room_area" data-options="type:'text',min:0,precision:1,required:true,validType:'nameTooLong',validateOnCreate:false,validateOnBlur:true,iconCls:'icon-man',prompt:'请输入面积'" style="width:40%;height:30px;padding:12px"/>
         </div>
         <div style="text-align: center; padding: 15px">
             <input class="easyui-textbox" id="room_remarks" name="room_remarks" data-options="type:'text',required:true,validType:'nameTooLong',validateOnCreate:false,validateOnBlur:true,iconCls:'icon-man',prompt:'请输入备注'" style="width:40%;height:30px;padding:12px"/>
@@ -40,3 +41,4 @@
             <a class="easyui-linkbutton" data-options="iconCls:'icon-cancel'" style="width:20%;height:36px;padding:12px" onclick="cancel()">取消</a>
         </div>
     </form>
+</div>

@@ -32,10 +32,10 @@
         类型：<input class="easyui-textbox" id="roomType_edit" name="roomType_edit" data-options="type:'text'" style="width:80%;height:30px;padding:12px"/>
     </div>
     <div style="padding: 10px;">
-        价格：<input class="easyui-textbox" id="roomPrice_edit" name="roomPrice_edit" data-options="type:'text'" style="width:80%;height:30px;padding:12px"/>
+        价格：<input class="easyui-numberbox" id="roomPrice_edit" name="roomPrice_edit" data-options="type:'text',min:0,precision:1" style="width:80%;height:30px;padding:12px"/>
     </div>
     <div style="padding: 10px;">
-        面积：<input class="easyui-textbox" id="roomArea_edit" name="roomArea_edit" data-options="type:'text'" style="width:80%;height:30px;padding:12px"/>
+        面积：<input class="easyui-numberbox" id="roomArea_edit" name="roomArea_edit" data-options="type:'text',min:0,precision:1" style="width:80%;height:30px;padding:12px"/>
     </div>
     <div style="padding: 10px;">
         备注：<input class="easyui-textbox" id="roomRemarks_edit" name="roomRemarks_edit" data-options="type:'text'" style="width:80%;height:30px;padding:12px"/>

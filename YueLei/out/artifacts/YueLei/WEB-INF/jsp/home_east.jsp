@@ -17,6 +17,6 @@
     </div>
     <a class="easyui-linkbutton" data-options="iconCls:'icon-message',iconAlign:'left'" onclick="customerMessageHandle()" style="width:30%;height:36px;margin-top: 10px;margin-left: 75px">留言</a>
 
-    <div class="easyui-calendar" id="calendar" style="width:100%;height:250px;margin-top: 100px;margin-left: 10px">
+    <div class="easyui-calendar" id="calendar" style="width:100%;height:250px;margin-top: 100px;">
     </div>
 </div>

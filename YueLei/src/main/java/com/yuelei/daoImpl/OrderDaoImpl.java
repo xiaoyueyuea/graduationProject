@@ -343,7 +343,7 @@ public class OrderDaoImpl implements OrderDao {
             orderEntity.setRoomNo(roomEntity.getRoomNo());
             orderEntity.setRoomType(roomEntity.getType());
             orderEntity.setRoomArea(roomEntity.getArea());
-            orderEntity.setRemarks("由"+oldRoomNo+"房转到"+newRoomNo+"房");
+            orderEntity.setRemarks(orderEntity.getRemarks()+",由"+oldRoomNo+"房转到"+newRoomNo+"房");
             if(!priceDifference.isEmpty()){
                 orderEntity.setRemarks(orderEntity.getRemarks()+",补差价:"+priceDifference);
             }

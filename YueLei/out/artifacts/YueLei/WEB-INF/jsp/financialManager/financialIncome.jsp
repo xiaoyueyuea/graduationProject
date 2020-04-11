@@ -21,6 +21,7 @@
     <a class="easyui-linkbutton" data-options="iconCls:'icon-condition-search'" onclick="loadGetFinancialIncomeTableByCondition()">搜索</a>
     <a class="easyui-linkbutton" data-options="iconCls:'icon-clear-condition'" onclick="clearCondition()">清空</a>
     <a class="easyui-linkbutton" data-options="iconCls:'icon-mini-refresh'" onclick="clearCondition()">刷新</a>
+    <a class="easyui-linkbutton" data-options="iconCls:'icon-excel'" onclick="exportExcel()" style="float: right">导出表格</a>
 </div>
 
 <table id="getFinancialIncome_table"></table>

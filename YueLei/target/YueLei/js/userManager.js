@@ -92,6 +92,8 @@ function employeeInfoEdit() {
                 if(res=="success"){
                     $.messager.alert("温馨提示","修改成功!");
                     $("#employee_edit_dialog").dialog('close');
+                }else if(res == "noPermission"){
+                    $.messager.alert("温馨提示","修改失败，请告知管理员获取权限");
                 }else {
                     $.messager.alert("温馨提示","修改失败!!");
                 }

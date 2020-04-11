@@ -95,10 +95,7 @@ function loadGetFinancialIncomeTableByCondition() {
             {field:"roomCharge",title:"房费",width:50,align:"center"},
             {field:"priceDifference",title:"换房差价",width:50,align:"center"},
             {field:"otherCost",title:"其它消费",width:50,align:"center"},
-            {field:"totalCost",title:"总收益",width:50,align:"center",formatter:function (value, row, index) {
-                    return (parseFloat(row.roomCharge)+parseFloat(row.priceDifference)+parseFloat(row.otherCost));
-                }
-            }
+            {field:"totalCost",title:"总收益",width:50,align:"center"}
         ]],
         onLoadSuccess : computeTotal,
         url : "financialManager/getAllFinancialIncomeByCondition_"+startDate+"_"+endDate+"_"+roomType,
@@ -134,4 +131,16 @@ function computeTotal() {
     }
 //新增一行显示统计信息
     $('#getFinancialIncome_table').datagrid('appendRow', { orderId: '<b>合计：</b>',roomCharge :totalRoomCharge, priceDifference : totalPriceDifference,otherCost : totalOtherCost});
+}
+
+//导出表格
+function exportExcel() {
+
+    var startDate = $("#getFinancialIncomeByStartDate").datebox("getValue");
+    var endDate = $("#getFinancialIncomeByEndDate").datebox("getValue");
+    var roomType = $("#selectType_getFinancialIncome").combobox("getValue");
+
+    location.href = "financialManager/exportExcel?" + "startDate=" + startDate
+        + "&endDate=" + endDate
+        + "&roomType=" + roomType
 }
