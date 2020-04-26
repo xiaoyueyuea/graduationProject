@@ -80,7 +80,7 @@ public class FinancialDaoImpl implements FinancialDao {
             List<FinancialManagerEntity> financialManagerEntityList = new ArrayList<>();
             String hql = "from FinancialManagerEntity FM where 1=1";
             if(!startDate.isEmpty()){
-                hql+=" and end_date >=?"+i;
+                hql+=" and start_date >=?"+i;
                 pram[i++]=startDate;
             }
             if(!endDate.isEmpty()){

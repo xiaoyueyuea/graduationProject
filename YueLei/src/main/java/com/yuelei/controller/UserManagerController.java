@@ -91,7 +91,7 @@ public class UserManagerController {
 
     @RequestMapping(path = "/getEmployeeByCondition_{number}_{username}_{phone}")
     public @ResponseBody
-    WebJsonResult getEmployeeByCondition(@PathVariable int number,@PathVariable String username,@PathVariable String phone){
+    WebJsonResult getEmployeeByCondition(@PathVariable Integer number,@PathVariable String username,@PathVariable String phone){
         DataGridResult dataGridResult=new DataGridResult();
         dataGridResult.setRows(userManagerService.getEmployeeListByCondition(number,username,phone));
         dataGridResult.setTotal(userManagerService.getEmployeeListByCondition(number,username,phone).size());

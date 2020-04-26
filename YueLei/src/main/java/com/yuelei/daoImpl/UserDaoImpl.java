@@ -1,6 +1,7 @@
 package com.yuelei.daoImpl;
 
 import com.yuelei.dao.UserDao;
+import com.yuelei.entity.OrderEntity;
 import com.yuelei.entity.UserEntity;
 import com.yuelei.entity.bean.PageResult;
 import com.yuelei.util.HibernateUtils;
@@ -139,45 +140,60 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public List<UserEntity> getConsumeByCondition(String username, String phone) {
+        String[] pram=new String[2];
+        int i=0;
         Session session=HibernateUtils.openSession();
         Transaction transaction = session.beginTransaction();
-        String hql="from UserEntity u where phone= :PHONE";
+        String hql="from UserEntity u where admin =2";
         List<UserEntity> userEntityList=new ArrayList<>();
         if(!username.isEmpty()){
-            UserEntity user=getUserByName(username);
-            if(user!=null){
-                userEntityList.add(user);
-            }
-        }else {
-            Query<UserEntity> query = session.createQuery(hql,UserEntity.class);
-            query.setParameter("PHONE",phone);
-            userEntityList=query.getResultList();
+            hql+=" and username =?"+i;
+            pram[i++]=username;
+        }
+        if(!phone.isEmpty()){
+            hql+=" and phone =?"+i;
+            pram[i++]=phone;
         }
 
+        Query<UserEntity> query = session.createQuery(hql,UserEntity.class);
+        for(int j=0;j<i;j++){
+            query.setParameter(j,pram[j]);
+        }
+
+        if(query.getResultList()!=null){
+            userEntityList=query.getResultList();
+        }
         transaction.commit();
         session.close();
         return userEntityList;
     }
 
     @Override
-    public List<UserEntity> getEmployeeByCondition(int number, String username, String phone) {
+    public List<UserEntity> getEmployeeByCondition(Integer number, String username, String phone) {
+        String[] pram=new String[2];
+        int i=0;
         Session session=HibernateUtils.openSession();
         Transaction transaction = session.beginTransaction();
-        String hql1="from UserEntity u where userId= :ID";
-        String hql2="from UserEntity u where phone= :PHONE";
+        String hql="from UserEntity u where admin != 2";
         List<UserEntity> userEntityList=new ArrayList<>();
-        if(!String.valueOf(number).isEmpty()){
-            Query<UserEntity> query = session.createQuery(hql1,UserEntity.class);
-            query.setParameter("ID",number);
-            userEntityList=query.getResultList();
-        }else if(!username.isEmpty()){
-            UserEntity user=getUserByName(username);
-            if(user!=null){
-                userEntityList.add(user);
-            }
-        }else {
-            Query<UserEntity> query = session.createQuery(hql2,UserEntity.class);
-            query.setParameter("PHONE",phone);
+        if(number != null){
+            hql+=" and userId ="+number;
+        }
+        if(!username.isEmpty()){
+            hql+=" and username =?"+i;
+            pram[i++]=username;
+        }
+        if(!phone.isEmpty()){
+            hql+=" and phone =?"+i;
+            pram[i++]=phone;
+        }
+
+        Query<UserEntity> query = session.createQuery(hql,UserEntity.class);
+        for(int j=0;j<i;j++){
+            query.setParameter(j,pram[j]);
+        }
+
+        if(query.getResultList()!=null){
             userEntityList=query.getResultList();
         }
         transaction.commit();

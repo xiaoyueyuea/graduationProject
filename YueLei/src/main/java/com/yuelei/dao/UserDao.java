@@ -22,7 +22,7 @@ public interface UserDao {
 
     List<UserEntity> getConsumeByCondition(String username,String phone);
 
-    List<UserEntity> getEmployeeByCondition(int number,String username,String phone);
+    List<UserEntity> getEmployeeByCondition(Integer number,String username,String phone);
 
     boolean addEmployee(String name,String password,String sex,String tel,int admin);
 }

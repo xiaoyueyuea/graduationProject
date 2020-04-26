@@ -66,7 +66,7 @@ public class UserManagerServiceImpl implements UserManagerService {
     }
 
     @Override
-    public List<UserItem> getEmployeeListByCondition(int number, String username, String phone) {
+    public List<UserItem> getEmployeeListByCondition(Integer number, String username, String phone) {
         List<UserEntity> userEntityList=userDao.getEmployeeByCondition(number,username,phone);
         List<UserItem> userItemList =new ArrayList<>();
         if(userEntityList!=null){

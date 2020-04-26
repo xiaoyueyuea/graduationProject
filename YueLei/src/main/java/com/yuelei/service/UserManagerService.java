@@ -18,7 +18,7 @@ public interface UserManagerService {
 
     List<UserItem> getConsumeListByCondition(String username,String phone);
 
-    List<UserItem> getEmployeeListByCondition(int number,String username,String phone);
+    List<UserItem> getEmployeeListByCondition(Integer number,String username,String phone);
 
     boolean addEmployee(String name,String password,String sex,String tel,int admin);
 }
