@@ -10,6 +10,7 @@ $(function () {
             $("#date_messageHandle").textbox('setValue',new Date(rowData.messageDate).toLocaleString());
             $("#content_messageHandle").textbox('setValue',rowData.messageContent);
             $("#status_messageHandle").textbox('setValue',rowData.status);
+            $("#messageDate_hidden").val(rowData.messageDate);
         }
     });
 });
@@ -52,7 +53,7 @@ function loadMessageTable() {
 
 function unTreatedMessageHandle() {
     var username=$("#username_messageHandle").textbox("getValue");
-    var messageDate=$("#date_messageHandle").textbox("getValue");
+    var messageDate=$("#messageDate_hidden").val();
     var status=$("#status_messageHandle").textbox('getValue');
     if(status=="已处理"){
         $.messager.alert("温馨提示","该留言已处理");

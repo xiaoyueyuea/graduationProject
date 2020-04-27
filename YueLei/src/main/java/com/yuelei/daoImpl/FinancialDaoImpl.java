@@ -34,9 +34,10 @@ public class FinancialDaoImpl implements FinancialDao {
                 int index = orderEntity.getRemarks().lastIndexOf(":");
                 if(index > 0){
                     financialManagerEntity.setPriceDifference(orderEntity.getRemarks().substring(index+1));
+                }else{
+                    financialManagerEntity.setPriceDifference("0");
                 }
-            }
-            if(financialManagerEntity.getPriceDifference().isEmpty()){
+            }else{
                 financialManagerEntity.setPriceDifference("0");
             }
             if(otherCost.isEmpty()){

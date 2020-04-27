@@ -40,7 +40,7 @@
     <div style="padding: 10px;">
         <input class="easyui-textbox" id="status_messageHandle" name="status_messageHandle" data-options="type:'text',editable:false" style="width:100%;height:30px;padding:12px;"/>
     </div>
-
+    <input id="messageDate_hidden" hidden="hidden"/>
     <div style="text-align:center;padding:5px 0 0;">
         <a class="easyui-linkbutton" data-options="iconCls:'icon-ok'" id="unTreatedMessageHandle" onclick="unTreatedMessageHandle()" style="width:80px">处理</a>
         <a class="easyui-linkbutton" data-options="iconCls:'icon-cancel'" href="javascript:void(0)" onclick="$('#messageHandle_dialog').dialog('close')" style="width:80px">取消</a>

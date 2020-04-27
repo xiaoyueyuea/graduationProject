@@ -142,7 +142,7 @@ function confirmEditRoomInfo() {
 
 function findRoomByCondition() {
     var roomNo = $("#searchRoomByRoomNo").textbox('getValue');
-    var roomType = $("#searchRoomByType").textbox('getValue');
+    var roomType = $("#selectType_editRoomInfo").combobox('getValue');
 
     if (roomNo == "" && roomType == "") {
         $.messager.alert("温馨提示", "搜索条件不可全为空!");
@@ -195,6 +195,6 @@ function findRoomByCondition() {
 
 function clearCondition() {
     $("#searchRoomByRoomNo").textbox('setValue',"");
-    $("#searchRoomByType").textbox('setValue',"");
+    $("#selectType_editRoomInfo").combobox('setValue',"");
     loadRoomListTable();
 }
